@@ -1,0 +1,49 @@
+---
+title: "WDI Dashboard (2022)"
+format:
+  dashboard:
+    theme: cosmo
+execute:
+  echo: false
+---
+
+```{python}
+import pandas as pd
+import plotly.express as px
+
+df = pd.read_csv("wdi.csv")
+```
+
+## Controls {.sidebar}
+
+```{python}
+import ipywidgets as widgets
+
+country_dropdown = widgets.Dropdown(
+    options=sorted(df["country"].dropna().unique()),
+    description="Country:"
+)
+
+country_dropdown
+```
+
+## GDP vs Life Expectancy
+
+```{python}
+filtered = df[df["country"] == country_dropdown.value]
+
+fig = px.scatter(
+    df,
+    x="gdp_per_capita",
+    y="life_expectancy",
+    hover_name="country",
+    title="GDP vs Life Expectancy (2022)"
+)
+fig
+```
+
+## Summary Statistics
+
+```{python}
+df[["gdp_per_capita", "life_expectancy"]].describe()
+```
