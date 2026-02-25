@@ -1,0 +1,91 @@
+---
+title: "World Development Indicators (2022)"
+author: "Ayushi Chowksey"
+date: today
+
+format:
+  revealjs:
+    theme: moon
+    transition: slide
+    slide-number: true
+  pdf: default
+
+execute:
+  echo: false
+---
+
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+
+
+df = pd.read_csv("wdi.csv")
+```
+
+
+# World Development Indicators (2022)
+
+
+## GDP, Life Expectancy, and Global Development Patterns
+
+
+Ayushi Chowksey
+
+# Introduction
+
+
+- This presentation analyses selected indicators from the World Development Indicators (2022).
+- Focus: Relationship between GDP per capita and life expectancy.
+- Objective: Explore economic and social development patterns across countries.
+
+# GDP vs Life Expectancy
+
+
+```{python}
+plt.figure()
+plt.scatter(df["gdp_per_capita"], df["life_expectancy"])
+plt.xlabel("GDP per Capita")
+plt.ylabel("Life Expectancy")
+plt.title("GDP vs Life Expectancy (2022)")
+plt.show()
+```
+
+
+- Strong positive relationship between income and life expectancy.
+- Rapid gains at lower income levels.
+- Diminishing returns at high income levels.
+
+# Top 10 Countries by GDP per Capita
+
+
+```{python}
+top10 = df.sort_values("gdp_per_capita", ascending=False).head(10)
+
+
+plt.figure()
+plt.bar(top10["country"], top10["gdp_per_capita"])
+plt.xticks(rotation=45, ha="right")
+plt.ylabel("GDP per Capita")
+plt.title("Top 10 Countries by GDP per Capita (2022)")
+plt.tight_layout()
+plt.show()
+```
+
+
+- High-income economies dominate the upper range.
+- Significant inequality across global income levels.
+- Highlights concentration of economic wealth.
+
+# Key Takeaways
+
+
+- Income strongly correlates with development outcomes.
+- Improvements in health taper at very high income levels.
+- Development is multidimensional — not purely economic.
+
+# Conclusion
+
+- GDP per capita remains a powerful predictor of life expectancy.
+- However, structural inequality persists globally.
+- Sustainable development requires broader investment beyond income growth.
